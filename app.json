@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "patientPortal",
+    "slug": "patientPortal",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "patientPortal"
+}
