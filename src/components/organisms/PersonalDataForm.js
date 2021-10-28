@@ -6,13 +6,13 @@ import {
     StyleSheet,
 } from "react-native";
 
-import InputField from '../atoms/InputField';
-import TextArea from '../atoms/TextArea';
+import InputField from '../../shared/atoms/InputField';
+import TextArea from '../../shared/atoms/TextArea';
 
-import DatePickerInput from '../molecules/DatePicker';
-import RadioGroup from '../molecules/RadioGroup';
+import DatePickerInput from '../../shared/molecules/DatePicker';
+import RadioGroup from '../../shared/molecules/RadioGroup';
 
-import Upload from '../molecules/Upload';
+import Upload from '../../shared/molecules/Upload';
 
 export default PersonalDataForm = ({userData, setUserData, personalDataError}) => {
 

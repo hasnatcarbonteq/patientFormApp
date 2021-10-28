@@ -1,10 +1,12 @@
 import React from 'react';
 import {View, StyleSheet, Text} from 'react-native';
 
-import SwitchInput from '../molecules/SwitchInput';
-import Upload from '../molecules/Upload';
-import InputField from '../atoms/InputField';
-import PickerField from '../molecules/PickerField';
+import InputField from '../../shared/atoms/InputField';
+
+import SwitchInput from '../../shared/molecules/SwitchInput';
+import Upload from '../../shared/molecules/Upload';
+import PickerField from '../../shared/molecules/PickerField';
+import CheckboxField from '../../shared/molecules/CheckboxField';
 
 import InsuranceCompanies from '../../utils/constant/InsuranceCompanies';
 
@@ -21,7 +23,7 @@ export default InsuranceDataForm = ({insuranceData, setInsuranceData, insuranceD
                 />
                 {
                     insuranceData.isInsured ? (
-                        <View>
+                        <View >
                             <Upload 
                                 label="Upload Insurance"
                                 maxItems={2}
@@ -46,12 +48,14 @@ export default InsuranceDataForm = ({insuranceData, setInsuranceData, insuranceD
                                 onChangeText={(value) => setInsuranceData({...insuranceData, insuranceNumber: value})}
                             />
                         </View>
-                    ) : <SwitchInput
-                            text="Is your Insurance Attesated?"
-                            value={insuranceData.isAttested}
-                            onValueChange={(value) => setInsuranceData({...insuranceData, isAttested: value})}
-                            error={insuranceDataError.isAttested}
-                        />
+                    ) : <View style={styles.subContainer}>
+                            <CheckboxField
+                                label="Is your Insurance Attesated?"
+                                checked={insuranceData.isAttested}
+                                onChange={(value) => setInsuranceData({...insuranceData, isAttested: value})}
+                                error={insuranceDataError.isAttested}
+                            />
+                        </View>
                 }
                 
             </View>
@@ -65,6 +69,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         padding: 10,
         width: '100%',
+    },
+    subContainer: {
+        marginRight: 10,
     },
     text: {
         fontSize: 30,

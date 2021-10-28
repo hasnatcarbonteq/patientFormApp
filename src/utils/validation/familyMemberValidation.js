@@ -7,15 +7,15 @@ export default validateFamilyMember = (insuranceData) => {
         errors.insuranceStatus = "Insurance Status is required";
     }
 
-    if (insuranceData.insuranceStatus === 'Other' && !insuranceData.firstName) {
+    if (!insuranceData.firstName) {
         errors.firstName = 'First Name is required';
     }
 
-    if (insuranceData.insuranceStatus === 'Other' && !insuranceData.lastName) {
+    if (!insuranceData.lastName) {
         errors.lastName = 'Last Name is required';
     }
 
-    if (insuranceData.insuranceStatus === 'Other' && !insuranceData.dob) {
+    if (!insuranceData.dob) {
         errors.dob = 'Date of Birth is required';
     }
 

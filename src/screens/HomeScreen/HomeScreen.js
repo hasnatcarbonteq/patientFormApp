@@ -1,21 +1,14 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import IconButton from "../../components/atoms/IconButton";
 
-export default HomeScreen = ({navigation}) => {
+import HomeTemplate from "../../components/template/HomeTemplate";
+
+export default HomeScreen = (props) => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.text}>Home Screen</Text>
-            <View style={styles.buttonContainer}>
-                <IconButton 
-                    variant="primary" 
-                    icon="plus"
-                    onPress={() => navigation.navigate('Sign Up')} 
-                    text="Add Patient"
-                />
-            </View>
+            <HomeTemplate {...props} />
         </View>
     );
 }

@@ -54,6 +54,10 @@ export default PatientFormTemplate = (props) => {
         setIsInsuranceDataValid(isValid);
     }
 
+    const submitForm = (props) => {
+        console.log(props)
+    }
+
     const buttonTextStyle = {
         fontSize: 18,
         fontWeight: 'bold',
@@ -71,7 +75,7 @@ export default PatientFormTemplate = (props) => {
             <ProgressSteps >
                 <ProgressStep 
                     label="Personal Data" 
-                    // onNext={personalDataVarification} 
+                    onNext={personalDataVarification} 
                     errors={!isPersnalDataValid} 
                     // nextBtnTextStyle={buttonTextStyle} 
                     // previousBtnTextStyle={buttonTextStyle} 
@@ -87,7 +91,7 @@ export default PatientFormTemplate = (props) => {
                 </ProgressStep>
                 <ProgressStep 
                     label="Insurance Data"
-                    // onNext={insuranceDataVerification}
+                    onNext={insuranceDataVerification}
                     errors={!isInsuranceDataValid}
                 >
                     <View style={{ alignItems: 'center' }}>
@@ -99,9 +103,13 @@ export default PatientFormTemplate = (props) => {
                         />
                     </View>
                 </ProgressStep>
-                <ProgressStep label="Family Data">
+                <ProgressStep 
+                    label="Family Data"
+                    onNext={submitForm}
+                >
                     <View style={{ alignItems: 'center' }}>
                         <FamilyDetailsForm 
+                            isInsurred={insuranceData.isInsured}
                             {...props}
                         />
                     </View>

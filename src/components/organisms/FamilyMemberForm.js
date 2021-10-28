@@ -1,15 +1,16 @@
 import React, {useState, useEffect} from 'react';
-import {View, Text, StyleSheet, TouchableOpacity, TextInput} from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { Checkbox } from '@ant-design/react-native';
 
-import InputField from '../atoms/InputField';
-import DatePickerInput from '../molecules/DatePicker';
-import Upload from '../molecules/Upload';
-import RadioGroup from '../molecules/RadioGroup';
-import IconButton from '../atoms/IconButton';
-import PickerField from '../molecules/PickerField';
+import InputField from '../../shared/atoms/InputField';
+import IconButton from '../../shared/atoms/IconButton';
+import DatePickerInput from '../../shared/molecules/DatePicker';
+
+import Upload from '../../shared/molecules/Upload';
+import RadioGroup from '../../shared/molecules/RadioGroup';
+import PickerField from '../../shared/molecules/PickerField';
+import CheckboxField from '../../shared/molecules/CheckboxField';
 
 import InsuranceCompanies from '../../utils/constant/InsuranceCompanies';
 import validateFamilyMember from '../../utils/validation/familyMemberValidation';
@@ -26,10 +27,10 @@ const status = [
     }
 ]
 
-export default FamilyMemberForm = ({ saveFamilyMember, insuranceStatusPatient}) => {
+export default FamilyMemberForm = ({ saveFamilyMember, isInsured, data}) => {
 
     const [member, setMember] = useState({
-        id: uuidv4(),
+        id: data.id,
         firstName: '',
         lastName: '',
         dob: '',
@@ -44,7 +45,6 @@ export default FamilyMemberForm = ({ saveFamilyMember, insuranceStatusPatient}) 
 
     const handleSubmit = () => {
         const {errors, isValid} = validateFamilyMember(member)
-        console.log(errors, isValid)
         if ( isValid ) {
             setError({})
             saveFamilyMember(member, isValid);
@@ -54,7 +54,7 @@ export default FamilyMemberForm = ({ saveFamilyMember, insuranceStatusPatient}) 
     }
 
     useEffect(()=> {
-        if (insuranceStatusPatient === 'Same') {
+        if (isInsured) {
             setMember({
                 ...member,
                 insuranceStatus: 'Same',
@@ -124,7 +124,12 @@ export default FamilyMemberForm = ({ saveFamilyMember, insuranceStatusPatient}) 
                             onChangeText={(value) => setMember({...member, insuranceNumber: value})}
                         />
                     </View> : member.insuranceStatus === 'None' ? <View>
-                        <Checkbox>Is your Insurance Attesated?</Checkbox>
+                        <CheckboxField
+                            checked={member.isAttested}
+                            onChange={(value) => setMember({...member, isAttested: value})}
+                            label="I attest that I am not related to the patient"
+                            error={error?.isAttested}
+                        />
                     </View> : null
                 }
                 <IconButton 
